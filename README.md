@@ -215,3 +215,36 @@ t = ('a', 'b', 'c')
 list_1 = list(reversed(l))  # ['c', 'b', 'a']
 tuple_1 = tuple(reversed(t))  # ('c', 'b', 'a')
 ```
+
+## 시간초과 해결방안
+
+> ### list 보다 deque를 사용하자
+
+- list에서 `pop(0)` 연산의 시간 복잡도는 **O(N)**이어서 N이 커질 수록 연산이 매우 느려진다. <br><br>
+
+### Deque란 ??
+
+: double-ended queue의 약자로 데이터를 양방향에서 추가하고 제거할 수 있는 자료구조
+
+- `popleft()`라는 메서드를 사용하면 list의 `pop(0)` 메서드와 같은 효과를 가진다!
+
+```python
+from collections import deque
+
+queue = deque([1, 2, 3])
+queue.append(4)
+# deque[1, 2, 3, 4]
+
+queue.popleft()
+# 1
+
+queue.popleft()
+# 2
+
+queue
+# deque[3, 4]
+```
+
+- deque은 Queue와 다르게 `appendleft(x)`라는 메서드가 있는데, 이 메서드를 사용하면 데이터를 앞에서 삽입할 수 있다.
+- deque의 `popleft()`와 `appendleft(x)`메서드는 모두 **O(1)**의 시간 복잡도를 가지기 때문에, 자료 구조보다 성능이 훨씬 뛰어나다!
+- 단점: 무작위 접근의 시간 복잡도가 O(N)이고, 내부적으로 linked list를 사용하기 때문에 N번째 데이터에 접근하려면 N번 순회가 필요하다.
