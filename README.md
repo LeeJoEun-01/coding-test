@@ -10,9 +10,21 @@
 </div>
 </details> -->
 
-## 입력받는 법
+### 목차
+###### 입력받는 법
+- [1차원 배열 입력받기](#1차원-배열-입력받기)
+- [한줄에 정수형 변수 여러개 입력받기](#한줄에-정수형-변수-여러개-입력받기)
+- [한줄에 문자열 변수 여러개 입력받기](#한줄에-문자열-변수-여러개-입력받기)
+###### 메소드&함수.Zip
+- [정렬 (sort(), sorted)](#정렬)
+- [파라미터 key 값 이용하기](#파라미터-key-값-이용하기)
+- [순서 뒤집기](#순서-뒤집기)
+###### 시간초과 해결방안
+- [Deque](#Deque)
 
-> ### 1차원 배열 입력받기
+
+# 입력받는 법
+### 1차원 배열 입력받기
 
 ```python
 #값 2개 입력받기\n
@@ -49,7 +61,7 @@ s = [list(map(int, input())) for _ in range(3)]
 arr = [list(map(int, input().split())) for _ in range(2)]
 ```
 
-> ### 한줄에 정수형 변수 여러개 입력받기
+### 한줄에 정수형 변수 여러개 입력받기
 
 ```python
 a, b, c, d = map(int, input().split())
@@ -64,7 +76,7 @@ a, b, c, d = map(int, input().split())
 2
 ```
 
-> ### 한줄에 문자열 변수 여러개 입력받기
+### 한줄에 문자열 변수 여러개 입력받기
 
 ```python
 a, b = input().split()
@@ -146,7 +158,7 @@ arr = [list(map(int, input().split())) for _ in range(n)]
 
 # 메소드&함수.Zip
 
-> ### 정렬 (sort(), sorted)
+> ### 정렬
 
 sort() 메서드: 본체를 변화시킨다.
 
@@ -182,7 +194,7 @@ print(b)
 
 ```
 
-#### 파라미터 key 값 이용하기 !!
+#### 파라미터 key 값 이용하기
 
 ```python
 gender = ['man', 'woman', 'girl', 'boy']
@@ -192,7 +204,7 @@ print(gender)
 #['man', 'boy', 'girl', 'woman']
 ```
 
-> ### 순서 뒤집기
+### 순서 뒤집기
 
 **reverse** <br>
 : list 타입에서 제공하는 함수로 리스트 값을 반환하는 것이 아니라 변환시켜준다.
@@ -216,13 +228,13 @@ list_1 = list(reversed(l))  # ['c', 'b', 'a']
 tuple_1 = tuple(reversed(t))  # ('c', 'b', 'a')
 ```
 
-## 시간초과 해결방안
+# 시간초과 해결방안
 
 > ### list 보다 deque를 사용하자
 
 - list에서 `pop(0)` 연산의 시간 복잡도는 **O(N)**이어서 N이 커질 수록 연산이 매우 느려진다. <br><br>
 
-### Deque란 ??
+### Deque
 
 : double-ended queue의 약자로 데이터를 양방향에서 추가하고 제거할 수 있는 자료구조
 
