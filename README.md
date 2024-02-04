@@ -20,7 +20,9 @@
 - [파라미터 key 값 이용하기](#파라미터-key-값-이용하기)
 - [순서 뒤집기](#순서-뒤집기)
 ###### 시간초과 해결방안
+- [빠른 입력](#빠른-입력)
 - [Deque](#Deque)
+- [Counter](#Counter)
 
 
 # 입력받는 법
@@ -156,6 +158,7 @@ arr = [list(map(int, input().split())) for _ in range(n)]
 </div>
 </details><br>
 
+<br><br>
 # 메소드&함수.Zip
 
 > ### 정렬
@@ -227,16 +230,16 @@ t = ('a', 'b', 'c')
 list_1 = list(reversed(l))  # ['c', 'b', 'a']
 tuple_1 = tuple(reversed(t))  # ('c', 'b', 'a')
 ```
-
+<br><br>
 # 시간초과 해결방안
-
-> ### list 보다 deque를 사용하자
-
-- list에서 `pop(0)` 연산의 시간 복잡도는 **O(N)**이어서 N이 커질 수록 연산이 매우 느려진다. <br><br>
+### 빠른 입력
+: Python의 input() 함수는 상대적으로 느린 편이기 때문에, 대량의 데이터를 입력받을 때는 `sys.stdin.readline()`을 사용하는 것이 효율적이다. 
 
 ### Deque
-
 : double-ended queue의 약자로 데이터를 양방향에서 추가하고 제거할 수 있는 자료구조
+
+#### list 보다 deque를 사용하자
+> list에서 `pop(0)` 연산의 시간 복잡도는 **O(N)**이어서 N이 커질 수록 연산이 매우 느려진다.
 
 - `popleft()`라는 메서드를 사용하면 list의 `pop(0)` 메서드와 같은 효과를 가진다!
 
@@ -260,3 +263,43 @@ queue
 - deque은 Queue와 다르게 `appendleft(x)`라는 메서드가 있는데, 이 메서드를 사용하면 데이터를 앞에서 삽입할 수 있다.
 - deque의 `popleft()`와 `appendleft(x)`메서드는 모두 **O(1)**의 시간 복잡도를 가지기 때문에, 자료 구조보다 성능이 훨씬 뛰어나다!
 - 단점: 무작위 접근의 시간 복잡도가 O(N)이고, 내부적으로 linked list를 사용하기 때문에 N번째 데이터에 접근하려면 N번 순회가 필요하다.
+
+### Counter
+: 데이터의 개수를 셀 때 매우 유용한 파이썬의 collections 모듈의 Counter 클래스 (Hash와 같이 알고리즘 문제를 풀 때에도 유용하게 사용할 수 있다.)
+
+- Counter 생성자는 여러 형태의 데이터를 인자로 받는다. 먼저 중복된 데이터가 저장된 배열을 인자로 넘기면 각 원소가 몇 번씩 나오는지가 저장된 객체를 얻게 된다.
+  ```python
+  from collections import Counter
+  
+  counter = Counter(['red', 'blue', 'red', 'green', 'blue', 'blue'])
+  # counter({'blue': 3, 'red': 2, 'green': 1})
+  ```
+- Counter를 사전(Dictionary)처럼 사용
+  - items()와 values()로 접근 가능 
+  ```python
+  max_count = max(counter.values())
+  many_color_arr = [color for color, count in counter.items() if count == max_count]
+
+  # 키로 값을 읽을 수 있다.
+  counter["blue"], counter["red"]
+  # (3, 2)
+  
+  # 특정 키에 해당하는 값을 갱신할 수 있다.
+  counter["blue"] += 100
+  # 103
+  
+  # in 키워드를 이용하여 특정 키가 카운터에 존재하는지 확인할 수 있다.
+  red in counter
+  # True
+  ```
+- **가장 흔한 데이터 찾기**
+  가장 흔한 데이터 찾는 작업을 좀 더 쉽게 할 수 있도록, 데이터의 개수가 많은 순으로 정렬된 배열을 리턴하는 `most_common()`이라는 메서드를 제공하고 있다.
+  ```python
+  from collections import Counter
+
+  Counter('hello world').most_common()
+  # [('l', 3), ('o', 2), ('h', 1), ('e', 1), (' ', 1), ('w', 1), ('r', 1), ('d', 1)]
+  Counter('hello world').most_common(2)
+  # [('l', 3), ('o', 2)]
+
+  ```
