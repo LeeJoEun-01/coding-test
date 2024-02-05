@@ -1,4 +1,4 @@
-# Greedy
+# Implementation
 # 1158. 요세푸스 문제
 
 from collections import deque
