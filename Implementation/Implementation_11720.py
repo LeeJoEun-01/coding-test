@@ -17,3 +17,11 @@
 
 word_arr = input().split()
 print(len(word_arr))
+
+# Implementation
+# 2558. A + B - 2
+
+a = int(input())
+b = int(input())
+
+print(a+b)
