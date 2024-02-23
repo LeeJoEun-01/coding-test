@@ -70,6 +70,7 @@ s = [list(map(int, input())) for _ in range(3)]
 #2 2 2 2 2
 arr = [list(map(int, input().split())) for _ in range(2)]
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/5c72bd3f-8eff-4b1d-a9cc-c9dde59cce38)
 
 ### 한줄에 정수형 변수 여러개 입력받기
 
@@ -85,6 +86,7 @@ a, b, c, d = map(int, input().split())
 >> print(b)
 2
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/c5d670a0-6af0-448a-9209-45ed4d0ea00f)
 
 ### 한줄에 문자열 변수 여러개 입력받기
 
@@ -166,6 +168,8 @@ arr = [list(map(int, input().split())) for _ in range(n)]
 </div>
 </details><br>
 
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/abc2a64b-f129-40ef-ba4f-31d57414e7df)
+
 ### Range 매개변수
 
 - range(start, end, step)
@@ -209,6 +213,7 @@ print(b)
 #[7, 6, 4, 3, 2, 0]
 
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/fc0f4df2-a7df-47d8-8b8d-4e7c08071d75)
 
 #### 파라미터 key 값 이용하기
 
@@ -219,6 +224,7 @@ print(gender)
 
 #['man', 'boy', 'girl', 'woman']
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/b73b71b7-4c85-49dd-8fa1-a6ba1e7d7131)
 
 ### 문자열 자르기
 
@@ -242,6 +248,7 @@ my_str = "This is a substring tutorial..!"
 result = my_str[-5:]
 print(result) # al..!
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/0b12362d-0968-4d18-8709-2658aa6fe063)
 
 ### 순서 뒤집기
 
@@ -286,6 +293,7 @@ words = [sys.stdin.readline().strip() for _ in range(n)]
 print(words)
 # ['a', 'ab', 'abc', 'abcd', 'abcde', 'abcdef']
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/32b96c0b-477b-4c6b-b386-817bcb2dd09f)
 
 ### Deque
 
@@ -317,6 +325,8 @@ queue
 - deque은 Queue와 다르게 `appendleft(x)`라는 메서드가 있는데, 이 메서드를 사용하면 데이터를 앞에서 삽입할 수 있다.
 - deque의 `popleft()`와 `appendleft(x)`메서드는 모두 **O(1)**의 시간 복잡도를 가지기 때문에, 자료 구조보다 성능이 훨씬 뛰어나다!
 - 단점: 무작위 접근의 시간 복잡도가 O(N)이고, 내부적으로 linked list를 사용하기 때문에 N번째 데이터에 접근하려면 N번 순회가 필요하다.
+
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/a06cb2f7-2e18-476f-86c5-37de6cabb8c5)
 
 ### Counter
 
