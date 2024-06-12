@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+# UTF-8 encoding when using korean
+
+import sys
+
+user_input1 = list(map(int, sys.stdin.readline().split()))
+N = user_input1[0]
+M = user_input1[1]
+
+houseArr = list(map(int, sys.stdin.readline().split()))
+drainArr = set()
+
+def rain(house1, house2):
+	if house1 == house2:
+		houseArr[house1-1] += 1
+		drainArr.add(house1-1)
+		return
+	
+	for i in range (house1, house2+1):
+		houseArr[i-1] += 1
+		drainArr.add(i-1)
+		
+	return
+
+def drain(drainArr):
+	for i in drainArr:
+		houseArr[i] -= 1
+		
+	drainArr.clear()
+	return
+
+for i in range(M):
+	arr = list(map(int, sys.stdin.readline().split()))
+	# 장마 계산
+	rain(arr[0],arr[1])
+	
+	if (i+1)%3 == 0:
+		# 배수 시스템 가동
+		drain(drainArr)
+	
+for i in houseArr:
+	print(f"{i} ", end="")
+
