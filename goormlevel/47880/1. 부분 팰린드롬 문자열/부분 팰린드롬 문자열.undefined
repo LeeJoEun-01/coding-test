@@ -1,0 +1,30 @@
+import sys
+
+word = list(map(str, sys.stdin.readline()))
+wordSet = set(word)
+
+result = list()
+
+def palindrome(targetWord):
+	word_len = len(targetWord)
+	if word_len%2 == 0:
+		for i in range(word_len//2):
+			if targetWord[i] != targetWord[word_len-1-i]:
+				return
+	else:
+		for i in range(word_len//2):
+			if targetWord[i] != targetWord[word_len-1-i]:
+				return
+	print(word_len)
+	exit()
+
+if len(word) == len(wordSet):
+	print(1)
+else:
+	for i in range(len(word)):
+		for j in range(i+1):
+			targetWord = word[0+j:len(word)-i+j]
+			palindrome(targetWord)
+		
+		
+	
