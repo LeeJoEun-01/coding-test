@@ -1,42 +1,47 @@
 import sys
-sys.setrecursionlimit(10000)
+from collections import deque
 
+def bfs(graph, visited):
+  count = 0
+  while False in visited:
+    for i in range(len(visited)):
+      if visited[i] == False:
+        count += 1
+        start = i
+        queue = deque([start])
+        visited[start] = True
+        break
 
-def dfs(x, y):
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
+    while queue:
+      v = queue.popleft()
 
-    # 상, 하, 좌, 우 탐색
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        # 범위 안에 있고 1이면(=배추이면) 지나간것을 -1로 표시하고 주변 탐색
-        if (0 <= nx < m) and (0 <= ny < n) and graph[ny][nx] == 1:
-            graph[ny][nx] = -1
-            dfs(nx, ny)
+      for i in graph[v]:
+        if not visited[i]:
+          queue.append(i)
+          visited[i] = True
+  return count
 
+def convertGraph(arr):
+  result = []
+  for i in range(len(arr)):
+    result.append([])
+    target = arr[i]    
+    for j in range(len(arr)):
+      if abs(target[0] - arr[j][0]) == 1 and target[1] == arr[j][1]:
+        result[i].append(j)
+      elif abs(target[1] - arr[j][1]) == 1 and target[0] == arr[j][0]:
+        result[i].append(j)
+  return result
 
-t = int(sys.stdin.readline())
-result = []
-for _ in range(t):
-    m, n, k = map(int, input().split())
-    graph = [[0]*m for _ in range(n)]
+T = int(sys.stdin.readline()) # 테스트케이스
 
-    # 배추 위치 표시
-    for _ in range(k):
-        x, y = map(int, input().split())
-        graph[y][x] = 1  # x, y 반대로 들어가는거 주의 !!
-
-    # 배추흰지렁이 개수 세기
-    count = 0
-    for x in range(m):
-        for y in range(n):
-            if graph[y][x] == 1:
-                dfs(x, y)
-                count += 1
-    print(count)
-
-#     result.append(count)
-
-# for i in result:
-#     print(i)
+for i in range(T):
+  M, N, K = map(int, sys.stdin.readline().split()) # 가로, 세로, 배추가 심어져 있는 개수
+  arr = []
+  for _ in range(K):
+    v = list(map(int, sys.stdin.readline().split()))
+    arr.append(v)
+  graph = convertGraph(arr)
+  visited = [False]*K
+  count = bfs(graph, visited)
+  print(count)
