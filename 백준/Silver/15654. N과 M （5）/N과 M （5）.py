@@ -10,6 +10,7 @@ result = []
 def dfs():
   if len(result) == M:
     print(' '.join(map(str, result)))
+    return
 
   for i in range(1, N+1):
     if not visited[i]:
