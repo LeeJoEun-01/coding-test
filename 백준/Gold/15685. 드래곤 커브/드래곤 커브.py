@@ -40,12 +40,10 @@ def findRectangle(arr_xy):
   count = 0
 
   for target in arr_xy:
-    # print(f"===target: {target}")
     if ([target[0], target[1]-1]) in arr_xy:
       if ([target[0]+1, target[1]-1]) in arr_xy:
         if ([target[0]+1, target[1]]) in arr_xy:
           count += 1
-          #print(f"===target: {target}  count1: {count}")
 
   return count
 
@@ -57,7 +55,5 @@ for line in arr:
     if i not in coordinates:
       coordinates.append(i)
 
-coordinates.sort(key = lambda x: x[0])
-# print(coordinates)
-
+# coordinates.sort(key = lambda x: x[0])
 print(findRectangle(coordinates))
