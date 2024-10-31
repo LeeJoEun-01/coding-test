@@ -15,9 +15,6 @@ for k in range(N):
     for j in range(N):
       graph[i][j] = min(graph[i][j], graph[i][k]+graph[k][j])
 
-      if i == j:
-        graph[i][j] = 0
-
 for i in range(N):
   for j in range(N):
     if i == j or graph[i][j] == math.inf:
