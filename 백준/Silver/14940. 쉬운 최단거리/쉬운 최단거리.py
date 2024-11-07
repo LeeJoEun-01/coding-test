@@ -1,45 +1,42 @@
-
 import sys
 from collections import deque
 
-N,M = map(int, sys.stdin.readline().split())
-arr = []
-result = [[0 for _ in range(M)] for _ in range(N)]
-start = [-1,-1]
+n, m = map(int, sys.stdin.readline().split())
 
-for i in range(N):
-  input_line = list(map(int, sys.stdin.readline().split()))
-  arr.append(input_line)
-  if 2 in input_line:
-    j = input_line.index(2)
-    start = [i,j]
+graph = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
+visited = [[0]*m for _ in range(n)]
 
-dx = [1,0,-1,0]
-dy = [0,-1,0,1]
+def bfs(start, graph, visited):
+  dx = [-1, 1, 0, 0]
+  dy = [0, 0, -1, 1]
 
-queue = deque([start])
+  q = deque([(start)])
+  visited[start[0]][start[1]] = 0
 
-while queue:
-  x, y = queue.popleft()
-  count = result[x][y]
+  while q:
+    x, y = q.popleft()
 
-  for i in range(4):
-    newX = x+dx[i]
-    newY = y+dy[i]
-    if 0 <= newX < N and 0 <= newY < M:
-      if arr[newX][newY] == 1:
-        result[newX][newY] = count+1
-        #print(f"result[{newX}][{newY}: {count+1}]")
-        arr[newX][newY] = 2
-        queue.append([newX,newY])
-      elif arr[newX][newY] == 0:
-        result[newX][newY] = 0
-  
-for i in range(N):
-  for j in range(M):
-    if result[i][j] == 0:
-      if arr[i][j] == 1:
-        print(-1, end=" ")
-      else: print(result[i][j], end=" ")
-    else: print(result[i][j], end=" ")
-  print()
+    for i in range(4):
+      nx = x + dx[i]
+      ny = y + dy[i]
+
+      if 0 <= nx < n and 0 <= ny < m :
+        if visited[nx][ny] == 0 and graph[nx][ny] == 1:
+          visited[nx][ny] = visited[x][y] + 1
+          q.append((nx, ny))
+
+
+for i in range(n):
+  for j in range(m):
+    if graph[i][j] == 2 :
+      start = (i, j)
+
+bfs(start, graph, visited)
+
+for i in range(n):
+    for j in range(m):
+        if visited[i][j] == 0 and graph[i][j] == 1:
+            print(-1, end=' ')
+        else:
+            print(visited[i][j], end=' ')
+    print()
