@@ -8,8 +8,7 @@ result = list(map(int, input().rstrip()))
 def onOff(tmp):
   count = 0
 
-  for _ in range(2):
-    for i in range(1,N):
+  for i in range(1,N):
       if tmp[i-1] == result[i-1]:
         continue
       
