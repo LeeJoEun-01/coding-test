@@ -1,26 +1,28 @@
 def solution(coin, cards):
     answer = 1
     n = len(cards)
-    N = n + 1
-    hand = set(cards[:n // 3])
-    stack = cards[n // 3:]
-    temp = set()
+    N = n+1
+    select = set(cards[:n//3])
+    stack = cards[n//3:]
+    trash = set()
 
-    for i in range(len(stack) // 2):
-        # 2개 카드 꺼내기
-        for x in stack[2 * i:2 * i + 2]:
-            if N - x in hand and coin >= 1:
+    for i in range(len(stack)//2):
+
+        # 카드 2개 꺼내고
+        for tmp in stack[2*i: 2*i+2]:
+            # 합이 N이 되는 수가 Select에 있으면 카드 선택
+            if N-tmp in select and coin >= 1:
                 coin -= 1
-                hand.add(x)
+                select.add(tmp)
             else:
-                temp.add(x)
+                trash.add(tmp)
 
-        # 1단계: hand 내에서 짝 제거
+        # select에서 합이 N인 카드 삭제
         check1 = False
-        for x in hand:
-            if N - x in hand:
-                hand.remove(x)
-                hand.remove(N - x)
+        for s in select:
+            if N-s in select:
+                select.remove(s)
+                select.remove(N-s)
                 answer += 1
                 check1 = True
                 break
@@ -28,13 +30,13 @@ def solution(coin, cards):
         if check1:
             continue
 
-        # 2단계: hand, temp 조합
+        # select + trash 조합
         check2 = False
-        for x in hand:
-            if N - x in temp and coin >= 1:
+        for s in select:
+            if N-s in trash and coin >= 1:
                 coin -= 1
-                hand.remove(x)
-                temp.remove(N - x)
+                select.remove(s)
+                trash.remove(N-s)
                 answer += 1
                 check2 = True
                 break
@@ -42,16 +44,17 @@ def solution(coin, cards):
         if check2:
             continue
 
-        # 3단계: temp 내에서 2개 코인 써서 구매
-        for x in temp:
-            if N - x in temp and coin >= 2:
+        # trash에서만 뽑아서 합 만들기
+        for t in trash:
+            if N-t in trash and coin >= 2:
                 coin -= 2
-                temp.remove(x)
-                temp.remove(N - x)
+                trash.remove(t)
+                trash.remove(N-t)
                 answer += 1
                 break
+
+        # 합이 되는 카드 못 만들면 종료
         else:
-            # 아무것도 못 했으면 종료
             return answer
 
     return answer
