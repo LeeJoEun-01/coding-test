@@ -3,7 +3,7 @@ input = sys.stdin.readline
 
 N = int(input().rstrip())
 arr = list(map(int, input().split()))
-re_arr = list(reversed(arr))
+re_arr = arr[::-1]
 
 increase = [1]*N
 decrease = [1]*N
