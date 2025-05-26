@@ -10,37 +10,24 @@
 #                                                                              #
 #  **************************************************************************  #
 import sys
-from collections import deque
 input = sys.stdin.readline
 
 S = list(input().rstrip())
 T = list(input().rstrip())
+isDone = False
 
-nS = len(S)
-nT = len(T)
-aCounting = T.count("A")
+while T:
+    if T[-1] == "A":
+        T.pop()
+    elif T[-1] == "B":
+        T.pop()
+        T.reverse()
 
-deq = deque([S])
-count = 0
-result = []
-while deq:
-    target = deq.popleft()
-    # print(f"= target: {target}")
-    if len(target) == nT:
-        result.append(target)
+    if S == T:
+        isDone = True
+        break
 
-    if target.count("A") < aCounting:
-        addA = target[:]
-        addA += "A"
-        deq.append(addA)
-    if target.count("B") < nT-aCounting:
-        reverseB = target[::-1]
-        reverseB += "B"
-        deq.append(reverseB)
-    #     print(f"= target: {target}")
-    # print(f"== target: {target} | deq: {deq}")
-
-ans = 0
-if T in result:
-    ans = 1
-print(ans)
+if isDone:
+    print(1)
+else:
+    print(0)
