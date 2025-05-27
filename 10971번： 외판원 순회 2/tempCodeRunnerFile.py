@@ -1,0 +1,3 @@
+    
+    print(N)
+    print(M)

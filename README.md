@@ -72,6 +72,8 @@ arr = [list(map(int, input().split())) for _ in range(2)]
 ```
 ![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/5c72bd3f-8eff-4b1d-a9cc-c9dde59cce38)
 
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/5c72bd3f-8eff-4b1d-a9cc-c9dde59cce38)
+
 ### 한줄에 정수형 변수 여러개 입력받기
 
 ```python
@@ -86,6 +88,8 @@ a, b, c, d = map(int, input().split())
 >> print(b)
 2
 ```
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/c5d670a0-6af0-448a-9209-45ed4d0ea00f)
+
 ![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/c5d670a0-6af0-448a-9209-45ed4d0ea00f)
 
 ### 한줄에 문자열 변수 여러개 입력받기
@@ -215,6 +219,8 @@ print(b)
 ```
 ![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/fc0f4df2-a7df-47d8-8b8d-4e7c08071d75)
 
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/fc0f4df2-a7df-47d8-8b8d-4e7c08071d75)
+
 #### 파라미터 key 값 이용하기
 
 ```python
@@ -226,28 +232,63 @@ print(gender)
 ```
 ![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/b73b71b7-4c85-49dd-8fa1-a6ba1e7d7131)
 
+##### 정렬 조건 lambda 사용
+
+```python
+a = [(4,0), (4,3), (4,2), (3,2), (2,1), (1,0)]
+
+# 인자 없이 sorted()를 사용하면 리스트 아이템의 각 요소 순서대로 정렬
+# 첫 번째 요소가 같으면 두 번째 요소로 비교
+b = sorted(a)
+print(b)    # [(1, 0), (2, 1), (3, 2), (4, 0), (4, 2), (4, 3)]
+
+# key인자에 lambda 함수를 넘겨주면 반환값을 가지고 비교해 정렬
+# 이 때, key로 전달되지 않은 요소에 대해선 정렬하지 않음
+c = sorted(a, key=lambda x : x[0])
+print(c)    # [(1, 0), (2, 1), (3, 2), (4, 0), (4, 3), (4, 2)]
+d = sorted(a, key=lambda x : x[1])
+print(d)    # [(4, 0), (1, 0), (2, 1), (4, 2), (3, 2), (4, 3)]
+```
+
+##### 정렬 조건 여러개
+
+```python
+# 정렬 기준으로 다중 조건을 넘겨줄 수도 있다
+# 첫 번째 인자를 기준으로 오름차순 정렬을 먼저 한다.
+# 그 결과를 가지고 두 번째 인자를 기준으로 내림차순 정렬(-를 붙이면 내림차순 정렬)
+e = sorted(a, key = lambda x : (x[0], -x[1]))
+print(e)    # [(1, 0), (2, 1), (3, 2), (4, 3), (4, 2), (4, 0)]
+```
+
+![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/b73b71b7-4c85-49dd-8fa1-a6ba1e7d7131)
+
 ### 문자열 자르기
 
-#### Slicing 
+#### Slicing
+
 - string[start:end]는 start를 포함하고, end를 포함하지 않는 문자열을 추출
 - step을 생략하면 기본적으로 1로 설정되며, 문자열을 자를 때는 1을 사용하면 됨
 
 ##### [ 앞에서부터 문자열 자르기 ]
+
 ```python
 my_str = "This is a substring tutorial..!"
 
 result = my_str[0:7]
 print(result) # This is
 ```
+
 > 여기서 0은 생략이 가능하여 string[:num]처럼 사용할 수 있습니다.
 
 ##### [ 뒤에서부터 문자열 자르기 ]
+
 ```python
 my_str = "This is a substring tutorial..!"
 
 result = my_str[-5:]
 print(result) # al..!
 ```
+
 ![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/0b12362d-0968-4d18-8709-2658aa6fe063)
 
 ### 순서 뒤집기
@@ -293,6 +334,7 @@ words = [sys.stdin.readline().strip() for _ in range(n)]
 print(words)
 # ['a', 'ab', 'abc', 'abcd', 'abcde', 'abcdef']
 ```
+
 ![image](https://github.com/LeeJoEun-01/coding-test/assets/78733700/32b96c0b-477b-4c6b-b386-817bcb2dd09f)
 
 ### Deque
