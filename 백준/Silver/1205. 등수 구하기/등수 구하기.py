@@ -1,0 +1,17 @@
+import sys
+input = sys.stdin.readline
+
+N, target, P = map(int, input().split())
+if N == 0:
+    print(1)
+else:
+    scores = list(map(int, input().split()))
+    if N == P and scores[-1] >= target:
+        print(-1)
+    else:
+        answer = N+1
+        for i in range(N):
+            if scores[i] <= target:
+                answer = i+1
+                break
+        print(answer)
