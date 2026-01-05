@@ -2,17 +2,14 @@ import sys
 input = sys.stdin.readline
 
 H, W = map(int, input().split())
-block = list(map(int, input().split()))
-ans = 0
+height = list(map(int, input().split()))
+answer = 0
 
 for i in range(1, W-1):
-    current = block[i]
-    left_max = max(block[:i+1])
-    right_max = max(block[i+1:])
-    min_h = min(left_max, right_max)
+    left_max = max(height[:i])
+    right_max = max(height[i+1:])
+    h = min(left_max, right_max)
+    if h > height[i]:
+        answer += (h-height[i])
 
-    tmp = min_h-current
-    if tmp >= 0:
-        ans += tmp
-
-print(ans)
+print(answer)
