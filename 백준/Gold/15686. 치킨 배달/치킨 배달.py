@@ -1,57 +1,39 @@
 import sys
+from itertools import combinations
 
-N, M = map(int, sys.stdin.readline().split())
-house = []
-chicken = []
+input = sys.stdin.readline
 
+N, M = map(int, input().split())
+maps = []
+
+chic = []
+home = []
 for i in range(N):
-  input = list(map(int, sys.stdin.readline().split()))
-  for j in range(N):
-    if input[j] == 1:
-      house.append([i,j])
-    elif input[j] == 2:
-      chicken.append([i,j])       
+    line = list(map(int, input().split()))
+    for j in range(N):
+        if line[j] == 2:
+            chic.append([i, j])
+        elif line[j] == 1:
+            home.append([i, j])
 
-def calcTotalDistance(house, chicken):
-  totalDistance = 0
-  for ho in house:
-     minDistance = 999999
-     for ch in chicken:
-        distance = calcDistance(ho,ch)
-        distance = abs(ho[0]-ch[0]) + abs(ho[1]-ch[1])
-        if minDistance > distance:
-          minDistance = distance
-     totalDistance = totalDistance + minDistance
-  return totalDistance
 
-def calcDistance(aHouse, aChicken):
-  distance = abs(aHouse[0]-aChicken[0]) + abs(aHouse[1]-aChicken[1])
-  return distance
+def calc_dis(chics):
+    sum = 0
+    for i in range(len(home)):
+        tmp = []
+        target = home[i]
+        for c in chics:
+            tmp.append(abs(c[0]-target[0])+abs(c[1]-target[1]))
+        sum += min(tmp)
 
-candidate = []
-dfsDistance = 999999
+    return sum
 
-def dfs(startIndex):
-  global dfsDistance
 
-  if len(candidate) == M:
-    totalDistance = calcTotalDistance(house, candidate)
-    if dfsDistance > totalDistance:
-      dfsDistance = totalDistance
-    return
-   
-  for i in range(startIndex, len(chicken)+1):
-      candidate.append(chicken[i-1])
-      startIndex += 1
-      dfs(startIndex)
-      candidate.pop()
-  
-  return dfsDistance
+# 치킨집 콤비네이션
+result = []
+for com in combinations(chic, M):
+    # 치킨 거리 합 구한는 함수
+    dis = calc_dis(com)
+    result.append(dis)
 
-   
-startIndex = 1
-
-if M == len(chicken):
-   print(calcTotalDistance(house, chicken))
-else:
-   print(dfs(startIndex))
+print(min(result))
